@@ -1,4 +1,4 @@
-﻿node_modules
+node_modules
 dist
 .env
 .env.local
@@ -10,3 +10,4 @@ apps/web/dist
 *.tsbuildinfo
 apps/web/*.js
 apps/web/*.d.ts
+apps/api/backups

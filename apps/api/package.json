@@ -7,6 +7,8 @@
     "dev": "nest start --watch",
     "build": "nest build",
     "start": "node dist/main.js",
+    "db:export": "node scripts/export-db.mjs",
+    "db:import": "node scripts/import-db.mjs",
     "lint": "eslint \"src/**/*.ts\""
   },
   "dependencies": {

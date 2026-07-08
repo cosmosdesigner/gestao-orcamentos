@@ -53,3 +53,24 @@ npm run dev
 npm run build
 npm run lint
 ```
+## Exportar e importar BD
+
+Exportar a BD atual para `apps/api/backups/`:
+
+```bash
+npm run db:export
+```
+
+Exportar para um caminho especifico:
+
+```bash
+npm run db:export -- ./backup.sqlite
+```
+
+Importar uma BD noutro computador:
+
+```bash
+npm run db:import -- ./backup.sqlite
+```
+
+Antes de importar, para a API se estiver a correr. O import valida o ficheiro SQLite, substitui a BD ativa e guarda a BD anterior como `gestao-orcamentos.sqlite.before-import-*` quando existir.
