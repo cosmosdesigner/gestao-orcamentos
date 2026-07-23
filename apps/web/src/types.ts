@@ -10,6 +10,12 @@ export interface Company {
   id: string;
   name: string;
   contact: string;
+  categories: Category[];
+}
+
+export interface Category {
+  id: string;
+  name: string;
 }
 
 export interface TimelineFile {
@@ -54,6 +60,7 @@ export interface DashboardData {
 export interface CreateRequestInput {
   title: string;
   specialtyId: string;
+  projectId?: string;
   companyIds: string[];
   status: RequestStatus;
   budgetMin: number;
@@ -61,4 +68,19 @@ export interface CreateRequestInput {
   location: string;
   dueDate: string;
   summary: string;
+}
+
+export interface UpdateTimelineInput {
+  text: string;
+}
+
+export interface Project {
+  id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+}
+
+export interface ProjectWithRequests extends Project {
+  requests: BudgetRequest[];
 }

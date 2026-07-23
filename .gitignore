@@ -11,3 +11,6 @@ apps/web/dist
 apps/web/*.js
 apps/web/*.d.ts
 apps/api/backups
+.omo
+.codegraph
+.playwright-mcp

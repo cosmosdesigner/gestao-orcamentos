@@ -10,6 +10,12 @@ export interface Company {
   id: string;
   name: string;
   contact: string;
+  categories: Category[];
+}
+
+export interface Category {
+  id: string;
+  name: string;
 }
 
 export interface TimelineFile {
@@ -34,6 +40,7 @@ export interface BudgetRequest {
   id: string;
   title: string;
   specialtyId: string;
+  projectId?: string;
   companyIds: string[];
   status: RequestStatus;
   budgetMin: number;
@@ -48,6 +55,7 @@ export interface BudgetRequest {
 export interface CreateBudgetRequestDto {
   title: string;
   specialtyId: string;
+  projectId?: string;
   companyIds: string[];
   status: RequestStatus;
   budgetMin: number;
@@ -60,4 +68,29 @@ export interface CreateBudgetRequestDto {
 export interface CreateTimelineDto {
   text: string;
   files: Array<Pick<TimelineFile, "name" | "type" | "size" | "dataUrl">>;
+}
+
+export interface UpdateTimelineDto {
+  text: string;
+}
+
+export interface Project {
+  id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+}
+
+export interface ProjectWithRequests extends Project {
+  requests: BudgetRequest[];
+}
+
+export interface CreateProjectDto {
+  name: string;
+  description?: string;
+}
+
+export interface UpdateProjectDto {
+  name?: string;
+  description?: string;
 }

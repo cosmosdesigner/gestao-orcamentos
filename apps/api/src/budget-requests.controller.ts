@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { BudgetRequestsService } from "./budget-requests.service";
-import { CreateBudgetRequestDto, CreateTimelineDto, RequestStatus } from "./types";
+import { CreateBudgetRequestDto, CreateTimelineDto, RequestStatus, UpdateTimelineDto } from "./types";
 
 @Controller()
 export class BudgetRequestsController {
@@ -27,8 +27,28 @@ export class BudgetRequestsController {
   }
 
   @Post("companies")
-  createCompany(@Body() body: { name: string; contact?: string }) {
-    return this.service.createCompany({ name: body.name, contact: body.contact ?? "" });
+  createCompany(@Body() body: { name: string; contact?: string; categoryIds: string[] }) {
+    return this.service.createCompany({ name: body.name, contact: body.contact ?? "", categoryIds: body.categoryIds ?? [] });
+  }
+
+  @Delete("companies/:id")
+  deleteCompany(@Param("id") companyId: string) {
+    return this.service.deleteCompany(companyId);
+  }
+
+  @Patch("companies/:id")
+  updateCompany(@Param("id") companyId: string, @Body() body: { name?: string; contact?: string; categoryIds?: string[] }) {
+    return this.service.updateCompany(companyId, body);
+  }
+
+  @Get("categories")
+  getCategories() {
+    return this.service.getCategories();
+  }
+
+  @Post("categories")
+  createCategory(@Body() body: { name: string }) {
+    return this.service.createCategory(body.name);
   }
 
   @Get("requests")
@@ -49,5 +69,15 @@ export class BudgetRequestsController {
   @Post("requests/:id/timeline")
   addTimeline(@Param("id") requestId: string, @Body() body: CreateTimelineDto) {
     return this.service.addTimelineEvent(requestId, body);
+  }
+
+  @Patch("requests/:id/timeline/:timelineId")
+  updateTimeline(@Param("id") requestId: string, @Param("timelineId") timelineId: string, @Body() body: UpdateTimelineDto) {
+    return this.service.updateTimelineEvent(requestId, timelineId, body);
+  }
+
+  @Delete("requests/:id/timeline/:timelineId")
+  deleteTimeline(@Param("id") requestId: string, @Param("timelineId") timelineId: string) {
+    return this.service.deleteTimelineEvent(requestId, timelineId);
   }
 }
